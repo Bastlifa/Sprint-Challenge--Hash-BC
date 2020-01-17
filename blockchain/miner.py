@@ -8,6 +8,7 @@ from uuid import uuid4
 from timeit import default_timer as timer
 
 import random
+import time
 
 
 def proof_of_work(last_proof):
@@ -23,12 +24,19 @@ def proof_of_work(last_proof):
     start = timer()
 
     print("Searching for next proof")
-    proof = 0
+    random.seed(time.time())
+    proof = random.random()
+    
     #  TODO: Your code here
+    while not valid_proof(str(last_proof), str(proof)):
+        proof = random.random()
 
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
 
+def hash(some_string):
+    raw_hash = hashlib.sha256(some_string.encode())
+    return raw_hash.hexdigest()
 
 def valid_proof(last_hash, proof):
     """
@@ -40,7 +48,12 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    pass
+    
+    if hash(last_hash)[:6] == hash(proof)[0:6]:
+        return True
+    return False
+    
+    # pass
 
 
 if __name__ == '__main__':
@@ -68,8 +81,8 @@ if __name__ == '__main__':
         data = r.json()
         new_proof = proof_of_work(data.get('proof'))
 
-        post_data = {"proof": new_proof,
-                     "id": id}
+        post_data = {   "proof": new_proof,
+                        "id": id}
 
         r = requests.post(url=node + "/mine", json=post_data)
         data = r.json()

@@ -12,8 +12,13 @@ def get_indices_of_item_weights(weights, length, limit):
     """
     YOUR CODE HERE
     """
+    # a = []
+    # for i in weights:
+    #     ht.hash_table_insert(i)
 
-    return None
+    # for 
+
+    # return None
 
 
 def print_answer(answer):
