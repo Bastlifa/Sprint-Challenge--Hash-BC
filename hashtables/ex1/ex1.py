@@ -14,6 +14,7 @@ def get_indices_of_item_weights(weights, length, limit):
     """
     a = []
     for i in range(len(weights)):
+        # if hash_table_retrieve(ht, weights[i]):
         hash_table_insert(ht, weights[i], i)
 
     for i in weights:

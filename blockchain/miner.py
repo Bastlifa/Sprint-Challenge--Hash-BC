@@ -24,12 +24,12 @@ def proof_of_work(last_proof):
     start = timer()
 
     print("Searching for next proof")
-    random.seed(time.time())
+    # random.seed(time.time())
     proof = random.random()
     
     #  TODO: Your code here
     while not valid_proof(str(last_proof), str(proof)):
-        proof = random.random()
+        proof -= 1
 
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
