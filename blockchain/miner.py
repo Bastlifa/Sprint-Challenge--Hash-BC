@@ -24,7 +24,7 @@ def proof_of_work(last_proof):
     start = timer()
 
     print("Searching for next proof")
-    # random.seed(time.time())
+    random.seed(time.time())
     proof = random.random()
     
     #  TODO: Your code here
